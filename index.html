@@ -31,10 +31,20 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       height: 100vh;
       background: #fafafa;
       margin: 0;
       font-family: sans-serif;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background: var(--btn-bg);
+      border-radius: 10px;
     }
     .calculator {
       border: 1px solid #ccc;
@@ -89,6 +99,10 @@
   </style>
 </head>
 <body>
+  <header>
+    <h1>Calculator</h1>
+    <button id="theme-toggle">🌓</button>
+  </header>
   <div class="calculator">
     <div class="display" id="display">0</div>
     <div class="buttons">
@@ -96,7 +110,6 @@
       <button class="operator" data-action="delete">DEL</button>
       <button class="operator" data-action="%">%</button>
       <button class="operator" data-action="/">÷</button>
-      <button class="operator" data-action="toggle-theme">🌓</button>
       <button data-number="7">7</button>
       <button data-number="8">8</button>
       <button data-number="9">9</button>
@@ -116,9 +129,14 @@
   </div>
   <script>
     const display = document.getElementById('display');
+    const themeToggle = document.getElementById('theme-toggle');
     let firstOperand = null;
     let operator = null;
     let awaitingNext = false;
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
 
     function calculate(a, b, operator) {
       a = parseFloat(a);
@@ -164,8 +182,6 @@
           firstOperand = result;
           operator = null;
           awaitingNext = true;
-        } else if (action === 'toggle-theme') {
-          document.body.classList.toggle('dark');
         } else {
           if (firstOperand !== null && operator) {
             const result = calculate(firstOperand, display.textContent, operator);
