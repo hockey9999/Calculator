@@ -4,89 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basic Calculator</title>
-  <style>
-    :root {
-      --btn-bg: #f0f0f0;
-      --btn-hover: #e0e0e0;
-      --btn-active: #d0d0d0;
-      --display-bg: #222;
-      --display-color: #fff;
-      --primary-color: #4CAF50;
-    }
-    .dark {
-      --btn-bg: #333;
-      --btn-hover: #444;
-      --btn-active: #555;
-      --display-bg: #000;
-      --display-color: #fff;
-      --primary-color: #81C784;
-    }
-    body.dark {
-      background: #333;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #fafafa;
-      margin: 0;
-      font-family: sans-serif;
-    }
-    .calculator {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      background: #fff;
-    }
-    .display {
-      width: 100%;
-      height: 60px;
-      background: var(--display-bg);
-      color: var(--display-color);
-      text-align: right;
-      padding: 10px;
-      border-radius: 5px;
-      font-size: 2rem;
-      margin-bottom: 10px;
-      overflow-x: auto;
-    }
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 60px);
-      grid-gap: 10px;
-    }
-    button {
-      width: 60px;
-      height: 60px;
-      font-size: 1.5rem;
-      border: none;
-      border-radius: 5px;
-      background: var(--btn-bg);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background: var(--btn-hover);
-    }
-    button:active {
-      background: var(--btn-active);
-    }
-    .operator {
-      background: var(--primary-color);
-      color: #fff;
-    }
-    .operator:hover {
-      background: #45a049;
-    }
-    .span-two {
-      grid-column: span 2;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="calculator">
@@ -114,71 +35,6 @@
       <button class="operator" data-action="=">=</button>
     </div>
   </div>
-  <script>
-    const display = document.getElementById('display');
-    let firstOperand = null;
-    let operator = null;
-    let awaitingNext = false;
-
-    function calculate(a, b, operator) {
-      a = parseFloat(a);
-      b = parseFloat(b);
-      if (operator === '+') return a + b;
-      if (operator === '-') return a - b;
-      if (operator === '*') return a * b;
-      if (operator === '/') return b === 0 ? 'Error' : a / b;
-      if (operator === '%') return (a / 100) * b;
-      return b;
-    }
-
-    function updateDisplay(value) {
-      display.textContent = value;
-    }
-
-    document.querySelector('.buttons').addEventListener('click', e => {
-      const target = e.target;
-      if (!target.matches('button')) return;
-      if (target.dataset.number !== undefined) {
-        if (awaitingNext) {
-          updateDisplay(target.dataset.number);
-          awaitingNext = false;
-        } else {
-          if (target.dataset.number === '.' && display.textContent.includes('.')) return;
-          updateDisplay(display.textContent === '0' ? target.dataset.number : display.textContent + target.dataset.number);
-        }
-      }
-      if (target.dataset.action) {
-        const action = target.dataset.action;
-        if (action === 'clear') {
-          updateDisplay('0');
-          firstOperand = null;
-          operator = null;
-          awaitingNext = false;
-        } else if (action === 'delete') {
-          const current = display.textContent.slice(0, -1) || '0';
-          updateDisplay(current);
-        } else if (action === '=') {
-          if (operator === null || awaitingNext) return;
-          const result = calculate(firstOperand, display.textContent, operator);
-          updateDisplay(result);
-          firstOperand = result;
-          operator = null;
-          awaitingNext = true;
-        } else if (action === 'toggle-theme') {
-          document.body.classList.toggle('dark');
-        } else {
-          if (firstOperand !== null && operator) {
-            const result = calculate(firstOperand, display.textContent, operator);
-            updateDisplay(result);
-            firstOperand = result;
-          } else {
-            firstOperand = display.textContent;
-          }
-          operator = action;
-          awaitingNext = true;
-        }
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
