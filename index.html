@@ -13,6 +13,17 @@
       --display-color: #fff;
       --primary-color: #4CAF50;
     }
+    .dark {
+      --btn-bg: #333;
+      --btn-hover: #444;
+      --btn-active: #555;
+      --display-bg: #000;
+      --display-color: #fff;
+      --primary-color: #81C784;
+    }
+    body.dark {
+      background: #333;
+    }
     * {
       box-sizing: border-box;
     }
@@ -85,6 +96,7 @@
       <button class="operator" data-action="delete">DEL</button>
       <button class="operator" data-action="%">%</button>
       <button class="operator" data-action="/">÷</button>
+      <button class="operator" data-action="toggle-theme">🌓</button>
       <button data-number="7">7</button>
       <button data-number="8">8</button>
       <button data-number="9">9</button>
@@ -152,6 +164,8 @@
           firstOperand = result;
           operator = null;
           awaitingNext = true;
+        } else if (action === 'toggle-theme') {
+          document.body.classList.toggle('dark');
         } else {
           if (firstOperand !== null && operator) {
             const result = calculate(firstOperand, display.textContent, operator);
