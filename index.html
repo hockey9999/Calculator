@@ -4,38 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Calculator</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
   <body>
     <div class="calculator">
       <header>
         <h1>My Calculator</h1>
-        <button class="operator theme-toggle" data-action="toggle-theme">🌓</button>
+        <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle dark mode"></button>
       </header>
-      <div class="display" id="display">0</div>
+      <div class="display" id="display" aria-live="polite">0</div>
     <div class="buttons">
-      <button class="operator" data-action="clear">C</button>
-      <button class="operator" data-action="delete">DEL</button>
-      <button class="operator" data-action="%">%</button>
-      <button class="operator" data-action="/">÷</button>
+      <button class="operator" data-action="clear" aria-label="clear">C</button>
+      <button class="operator" data-action="delete" aria-label="delete">DEL</button>
+      <button class="operator" data-action="%" aria-label="percent">%</button>
+      <button class="operator" data-action="/" aria-label="divide">÷</button>
       <button data-number="7">7</button>
       <button data-number="8">8</button>
       <button data-number="9">9</button>
-      <button class="operator" data-action="*">×</button>
+      <button class="operator" data-action="*" aria-label="multiply">×</button>
       <button data-number="4">4</button>
       <button data-number="5">5</button>
       <button data-number="6">6</button>
-      <button class="operator" data-action="-">−</button>
+      <button class="operator" data-action="-" aria-label="subtract">−</button>
       <button data-number="1">1</button>
       <button data-number="2">2</button>
       <button data-number="3">3</button>
-      <button class="operator" data-action="+">+</button>
+      <button class="operator" data-action="+" aria-label="add">+</button>
       <button data-number="0" class="span-two">0</button>
-      <button data-number=".">.</button>
-      <button class="operator" data-action="=">=</button>
+      <button data-number="." aria-label="decimal point">.</button>
+      <button class="operator" data-action="=" aria-label="equals">=</button>
     </div>
   </div>
   <script src="script.js"></script>
