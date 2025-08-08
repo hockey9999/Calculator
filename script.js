@@ -47,8 +47,6 @@ document.querySelector('.buttons').addEventListener('click', e => {
       firstOperand = result;
       operator = null;
       awaitingNext = true;
-    } else if (action === 'toggle-theme') {
-      document.body.classList.toggle('dark');
     } else {
       if (firstOperand !== null && operator) {
         const result = calculate(firstOperand, display.textContent, operator);
@@ -61,4 +59,8 @@ document.querySelector('.buttons').addEventListener('click', e => {
       awaitingNext = true;
     }
   }
+});
+
+document.querySelector('[data-action="toggle-theme"]').addEventListener('click', () => {
+  document.body.classList.toggle('dark');
 });
